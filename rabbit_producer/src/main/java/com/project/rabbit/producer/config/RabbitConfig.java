@@ -66,4 +66,19 @@ public class RabbitConfig {
         return BindingBuilder.bind(queue).to(exchange);
     }
     /*****************************************Fanout广播*************************************************************/
+    /*****************************************Direct定向*******************************************************/
+    @Bean("directExchange")
+    public DirectExchange DirectExchange(){
+        return ExchangeBuilder.directExchange(ExchangeEnum.DIRECT.getName()).durable(true).build();
+    }
+
+    @Bean("directQueue")
+    public Queue directQueueOne() {
+        return QueueBuilder.durable(QueueEnum.DIRECT_QUEUE).build();
+    }
+    @Bean
+    public Binding directQueueExchange(@Qualifier("directQueue") Queue queue, @Qualifier("directExchange") DirectExchange exchange) {
+        return BindingBuilder.bind(queue).to(exchange).with("dir");
+    }
+    /*****************************************Direct定向*******************************************************/
 }
