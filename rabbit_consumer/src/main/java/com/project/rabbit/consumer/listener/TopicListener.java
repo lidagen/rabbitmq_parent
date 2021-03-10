@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 public class TopicListener {
     @RabbitListener(queues = QueueEnum.TOPIC_QUEUE)
     public void msg(String msg) {
+
         System.out.println("收到消息：" + msg);
     }
 }
