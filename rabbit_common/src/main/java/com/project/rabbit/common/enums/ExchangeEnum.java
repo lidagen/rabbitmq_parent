@@ -7,7 +7,8 @@ package com.project.rabbit.common.enums;
  */
 
 public enum ExchangeEnum {
-    TOPIC("MY_TOPIC_EXCHANGE","通配符规则Exchange");
+    TOPIC("MY_TOPIC_EXCHANGE","通配符规则Exchange"),
+    FANOUT("MY_FANOUT_EXCHANGE","通配符规则Exchange");
 
     private String name;
     private String desc;

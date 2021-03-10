@@ -14,11 +14,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class RabbitConfig {
-    /**
-     * 定义queue名字
-     */
-    public static final String QUEUE_NAME = "MY_TOPIC_QUEUE";
-
+    /*****************************************TOPIC*******************************************************/
     /**
      * 声明交换机
      */
@@ -43,4 +39,31 @@ public class RabbitConfig {
     public Binding itemQueueExchange(@Qualifier("itemQueue") Queue queue, @Qualifier("topicExchange") Exchange exchange) {
         return BindingBuilder.bind(queue).to(exchange).with("item.#").noargs();
     }
+    /*****************************************TOPIC*******************************************************/
+
+    /*****************************************Fanout广播*************************************************************/
+    @Bean("fanoutExchange")
+    public FanoutExchange FanoutExchange(){
+        return ExchangeBuilder.fanoutExchange(ExchangeEnum.FANOUT.getName()).durable(true).build();
+    }
+    @Bean("oneQueue")
+    public Queue fanoutQueueOne() {
+        return QueueBuilder.durable(QueueEnum.FANOUT_QUEUE_ONE).build();
+    }
+    @Bean("twoQueue")
+    public Queue fanoutQueueTwo() {
+        return QueueBuilder.durable(QueueEnum.FANOUT_QUEUE_TWO).build();
+    }
+
+
+    @Bean
+    public Binding fanoutOneQueueExchange(@Qualifier("oneQueue") Queue queue, @Qualifier("fanoutExchange") FanoutExchange exchange) {
+        return BindingBuilder.bind(queue).to(exchange);
+    }
+
+    @Bean
+    public Binding fanoutTwoQueueExchange(@Qualifier("twoQueue") Queue queue, @Qualifier("fanoutExchange") FanoutExchange exchange) {
+        return BindingBuilder.bind(queue).to(exchange);
+    }
+    /*****************************************Fanout广播*************************************************************/
 }

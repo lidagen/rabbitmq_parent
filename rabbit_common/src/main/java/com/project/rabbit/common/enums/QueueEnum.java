@@ -7,6 +7,8 @@ package com.project.rabbit.common.enums;
  */
 public class QueueEnum {
     public static final String TOPIC_QUEUE = "MY_TOPIC_QUEUE";
+    public static final String FANOUT_QUEUE_ONE = "MY_FANOUT_QUEUE_ONE";
+    public static final String FANOUT_QUEUE_TWO = "MY_FANOUT_QUEUE_TWO";
 
 
 }

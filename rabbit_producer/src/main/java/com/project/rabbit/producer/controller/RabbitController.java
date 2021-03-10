@@ -27,4 +27,16 @@ public class RabbitController {
         rabbitTemplate.convertAndSend(ExchangeEnum.TOPIC.getName(),key,msg);
         return "发送消息成功！";
     }
+
+
+    @GetMapping("/fanoutSendMsg")
+    public String fanoutSendMsg(@RequestParam String msg) {
+        /**
+         * exchange 交换机名称
+         * routingKey 路由key
+         * object消息
+         */
+        rabbitTemplate.convertAndSend(ExchangeEnum.FANOUT.getName(),"",msg);
+        return "发送消息成功！";
+    }
 }
